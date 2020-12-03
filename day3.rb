@@ -81,5 +81,5 @@ def traverse(map,slope)
     trees_hit
 end
 
-
 puts traverse(map, [3,1])
+puts traverse(map, [3,1]) * traverse(map, [1,1]) * traverse(map, [5,1]) * traverse(map, [7,1]) * traverse(map, [1,2])
