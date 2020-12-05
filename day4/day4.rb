@@ -141,7 +141,7 @@ def valid_field?(field, value)
     when "hgt"
         unit = value[-2..-1]
         measurement = value[0..-3]
-        return true if (unit = "cm" && measurement.to_i.between?(150, 193)) || (unit = "in" && measurement.to_i.between?(59, 76))
+        return true if (unit == "cm" && measurement.to_i.between?(150, 193)) || (unit == "in" && measurement.to_i.between?(59, 76))
     when "hcl"
         return true if value[0] == "#" && value[1..-1].split("").all? { |ele| ((0..9).include?(ele.to_i) && ele.to_i.to_s == ele) || ("a".."f").include?(ele)} && value.length == 7
     when "ecl"
