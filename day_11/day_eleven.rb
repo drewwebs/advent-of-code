@@ -8,14 +8,14 @@ end
 
 def sit_down?(chart, seat_index)
     row, seat = seat_index
-    left = (seat - 1 >= 0) ? (chart.dig(row, seat-1)) : "."
-    right = chart.dig(row, seat+1) || "."
-    down = chart.dig(row+1, seat) || "."
-    up = (row - 1 >= 0) ? (chart.dig(row-1, seat)) : "."
-    diag_down_right = chart.dig(row+1, seat+1) || "."
-    diag_up_right = (row - 1 >= 0) ? chart.dig(row-1, seat+1) || "." : "."
-    diag_down_left = (seat - 1 >= 0) ? chart.dig(row+1, seat-1) || "." : "."
-    diag_up_left = (seat - 1 >= 0 && row-1 >= 0) ? chart.dig(row-1, seat-1) : "."
+    left = (seat - 1 >= 0) ? (chart.dig(row, seat-1)) : nil
+    right = chart.dig(row, seat+1) || nil
+    down = chart.dig(row+1, seat) || nil
+    up = (row - 1 >= 0) ? (chart.dig(row-1, seat)) : nil
+    diag_down_right = chart.dig(row+1, seat+1) || nil
+    diag_up_right = (row - 1 >= 0) ? chart.dig(row-1, seat+1) || nil : nil
+    diag_down_left = (seat - 1 >= 0) ? chart.dig(row+1, seat-1) || nil : nil
+    diag_up_left = (seat - 1 >= 0 && row-1 >= 0) ? chart.dig(row-1, seat-1) : nil
 
     dirs = [left, right, down, up, diag_down_left, diag_down_right, diag_up_left, diag_up_right]
     
