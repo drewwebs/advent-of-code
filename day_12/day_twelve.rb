@@ -1,4 +1,5 @@
-DIRECTIONS = %w[north, south, east, west]
+DIRECTIONS = %w[N E S W]
+require 'byebug'
 
 def get_manhattan_distance
     input = File.open('input', 'r')
@@ -8,28 +9,38 @@ def get_manhattan_distance
 
     input.each do |line|
         direction = line[0]
-        distance = line[1..-1]
-        
-        if %w[north, south, east, west].include?(direction)
-            %w[north, south].include?(direction) ? dirsHash["netNorth"] += distance : dirsHash["netEast"] += distance
-        elsif %[left, right].include?(direction)
-            dir == 'left' ? dir -= distance : dir += distance
-        else
-            dir = direction / 4
-            direction = DIRECTIONS[dir]
+        distance = line[1..-1].to_i
+
+        if DIRECTIONS.include?(direction)
             case direction
-            when 'north'
+            when 'N'
                 dirsHash['netNorth'] += distance
-            when 'east'
+            when 'E'
                 dirsHash['netEast'] += distance
-            when 'south'
+            when 'S'
                 dirsHash['netNorth'] -= distance
-            when 'west'
+            when 'W'
+                dirsHash['netEast'] -= distance
+            end
+        elsif %[L R].include?(direction)
+            direction == 'L' ? dir -= distance : dir += distance
+        else
+            directionIndex = (dir / 90) % 4
+            direction = DIRECTIONS[directionIndex]
+            
+            case direction
+            when 'N'
+                dirsHash['netNorth'] += distance
+            when 'E'
+                dirsHash['netEast'] += distance
+            when 'S'
+                dirsHash['netNorth'] -= distance
+            when 'W'
                 dirsHash['netEast'] -= distance
             end
         end
     end
-    dirsHash['netNorth'] + dirsHash['netEast']
+    dirsHash['netNorth'].abs() + dirsHash['netEast'].abs()
 end
 
 p get_manhattan_distance
